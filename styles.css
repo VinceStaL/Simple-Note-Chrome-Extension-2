@@ -1,0 +1,104 @@
+/* ... existing styles ... */
+
+body { 
+  width: 300px; 
+  padding: 10px; 
+  max-height: 600px; 
+  overflow-y: auto; 
+}
+
+.secure-input { 
+  width: 100%; 
+  min-height: 50px; 
+  resize: vertical; 
+}
+
+#tabs-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#tabs {
+  display: flex;
+  overflow-x: auto;
+  flex-grow: 1;
+}
+
+.tab {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+#tab-controls {
+  display: flex;
+  margin-left: 5px;
+}
+
+#add-tab, #delete-tab, #copy-tab, #paste-tab, #export-tab {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+#add-tab {
+  border-radius: 5px 0 0 5px;
+  border-right: none;
+}
+
+#delete-tab {
+  border-right: none;
+}
+
+#copy-tab {
+  border-right: none;
+}
+
+#paste-tab {
+  border-right: none;
+}
+
+#export-tab {
+  border-radius: 0 5px 5px 0;
+}
+
+#add-tab:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#delete-tab:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+#copy-tab:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+#paste-tab:hover {
+  background-color: #17a2b8;
+  color: white;
+}
+
+#export-tab:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.chat-area {
+  margin-top: 10px;
+}
+
+/* ... existing styles ... */
