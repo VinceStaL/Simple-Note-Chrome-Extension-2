@@ -3,6 +3,16 @@ let chatHistory = {};
 let tabsData = [];
 let deleteConfirmTimeout = null;
 
+// Listen for messages from background script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'closeSidePanel') {
+    window.close();
+  }
+});
+
+// Notify background script that panel is opened
+chrome.runtime.sendMessage({ action: 'panelOpened' });
+
 document.addEventListener('DOMContentLoaded', function() {
   const addTabButton = document.getElementById('add-tab');
   const deleteTabButton = document.getElementById('delete-tab');
