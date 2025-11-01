@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Simple Note",
-  "version": "1.4.1",
-  "description": "A simple note Chrome extension",
+  "name": "Simple Note v2",
+  "version": "1.0.0",
+  "description": "A simple note Chrome extension v2",
   "permissions": ["storage", "downloads", "clipboardRead", "sidePanel"],
   "action": {
     "default_icon": {

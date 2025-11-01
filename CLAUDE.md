@@ -4,15 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Simple Note is a Chrome Manifest V3 extension that provides encrypted note-taking functionality with multi-tab support. All notes are stored locally in the browser using Chrome's storage API with base64 encoding.
+Simple Note v2 is a Chrome Manifest V3 extension that provides encrypted note-taking functionality with multi-tab support. All notes are stored locally in the browser using Chrome's storage API with base64 encoding.
 
 ## Architecture
 
 ### Core Components
 
-- **[popup.html](popup.html)**: Extension UI popup with tab controls and chat container
+- **[popup.html](popup.html)**: Extension UI side panel with tab controls and note container
 - **[popup.js](popup.js)**: Main application logic handling tabs, encryption, storage, and UI interactions
-- **[background.js](background.js)**: Service worker (currently minimal, only logs install/activate events)
+- **[background.js](background.js)**: Service worker handling side panel toggle functionality and state management
 - **[manifest.json](manifest.json)**: Chrome extension manifest (v3) defining permissions and entry points
 
 ### Data Flow
@@ -65,6 +65,7 @@ When modifying functionality:
 - `storage`: Required for `chrome.storage.local` to persist notes
 - `downloads`: Required for the export-to-file feature
 - `clipboardRead`: Required for the paste functionality
+- `sidePanel`: Required for the side panel interface
 
 ## No Build Process
 
