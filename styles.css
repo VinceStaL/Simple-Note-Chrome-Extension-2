@@ -1,75 +1,32 @@
-/* ... existing styles ... */
-
-body { 
-  width: 300px; 
-  padding: 10px; 
-  max-height: 600px; 
-  overflow-y: auto; 
-}
-
-.secure-input { 
-  width: 100%; 
-  min-height: 50px; 
-  resize: vertical; 
-}
-
-#tabs-container {
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-#tabs {
-  display: flex;
-  overflow-x: auto;
-  flex-grow: 1;
-}
-
-.tab {
-  padding: 5px 10px;
-  margin-right: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-.tab.active {
-  background-color: #007bff;
-  color: white;
-}
-
+/* Control buttons at the top */
 #tab-controls {
   display: flex;
-  margin-left: 5px;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f8f8;
 }
 
 #add-tab, #delete-tab, #copy-tab, #paste-tab, #export-tab {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border: none;
+  border-right: 1px solid #ccc;
   background-color: #f0f0f0;
   cursor: pointer;
-}
-
-#add-tab {
-  border-radius: 5px 0 0 5px;
-  border-right: none;
-}
-
-#delete-tab {
-  border-right: none;
-}
-
-#copy-tab {
-  border-right: none;
-}
-
-#paste-tab {
-  border-right: none;
+  flex: 1;
 }
 
 #export-tab {
-  border-radius: 0 5px 5px 0;
+  border-right: none;
 }
 
 #add-tab:hover {
@@ -97,8 +54,70 @@ body {
   color: white;
 }
 
-.chat-area {
-  margin-top: 10px;
+/* Container for tabs and content */
+#tabs-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* ... existing styles ... */
+/* Vertical tabs sidebar */
+#tabs {
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  border-right: 1px solid #ccc;
+  background-color: #f8f8f8;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.tab {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  text-align: center;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
+
+.tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Chat container */
+#chat-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.secure-input {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  resize: none;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}

@@ -75,7 +75,6 @@ function createChatArea(id) {
   textarea.id = `secureInput-${id}`;
   textarea.classList.add('secure-input');
   textarea.addEventListener('input', function() {
-    adjustTextareaHeight(textarea);
     saveChatContent(id);
   });
 
@@ -96,7 +95,6 @@ function switchTab(tabId) {
   // Load saved content
   const textarea = chatArea.querySelector('textarea');
   textarea.value = chatHistory[tabId] ? decrypt(chatHistory[tabId]) : '';
-  adjustTextareaHeight(textarea);
 
   // Update active tab styling
   document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -154,7 +152,6 @@ function deleteSelectedTab() {
     const textarea = document.querySelector(`#chat-area-${currentTabId} textarea`);
     textarea.value = '';
     chatHistory[currentTabId] = encrypt('');
-    adjustTextareaHeight(textarea);
     saveAllData();
     return;
   }
@@ -176,11 +173,6 @@ function deleteSelectedTab() {
     });
   }
   saveAllData();
-}
-
-function adjustTextareaHeight(textarea) {
-  textarea.style.height = 'auto';
-  textarea.style.height = Math.min(textarea.scrollHeight, 500) + 'px';
 }
 
 function saveChatContent(tabId) {
@@ -231,9 +223,8 @@ function pasteToCurrentTab() {
   navigator.clipboard.readText().then((clipboardText) => {
     const textarea = document.querySelector(`#chat-area-${currentTabId} textarea`);
     textarea.value += clipboardText;
-    adjustTextareaHeight(textarea);
     saveChatContent(currentTabId);
-    
+
     const pasteButton = document.getElementById('paste-tab');
     pasteButton.style.fontWeight = 'bold';
     setTimeout(() => {

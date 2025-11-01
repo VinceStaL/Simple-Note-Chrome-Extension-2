@@ -7,4 +7,7 @@ self.addEventListener('activate', (event) => {
   console.log('Service worker activated');
 });
 
-// Add any background logic here if needed
+// Open side panel when extension icon is clicked
+chrome.action.onClicked.addListener((tab) => {
+  chrome.sidePanel.open({ windowId: tab.windowId });
+});
