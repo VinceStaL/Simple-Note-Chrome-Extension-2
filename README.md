@@ -1,4 +1,4 @@
-![icon128](https://github.com/user-attachments/assets/8acc45b3-147e-4158-b21c-9c1fbdd8d768)
+![icon128](icon128.png)
 
 # Simple Note Chrome Extension v2
 
