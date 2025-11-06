@@ -44,4 +44,4 @@ This Chrome extension provides a secure and convenient way to take and manage en
 ## Installation
 
 You can get this extension at Chrome Web Store:
-https://chromewebstore.google.com/detail/simple-note/paacjligoklhndalflbcghimfiahfbmc
+https://chromewebstore.google.com/detail/simple-note-v2/ehoklhangbkbgoofaemekbmjdlfmcljo
