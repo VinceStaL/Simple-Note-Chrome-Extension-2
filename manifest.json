@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Simple Note v2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple note Chrome extension v2",
   "permissions": ["storage", "downloads", "clipboardRead", "sidePanel"],
   "action": {
