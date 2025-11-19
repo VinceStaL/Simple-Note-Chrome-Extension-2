@@ -60,6 +60,8 @@ When modifying functionality:
 
 **Auto-save**: Content is saved on every input event and when the popup loses focus (blur event).
 
+**Line Numbers**: The editor displays line numbers that correctly handle wrapped lines ([popup.js:132-182](popup.js#L132-L182)). When a line wraps due to length, the line number stays aligned with the first visual line while the div expands to match the wrapped text height. A `ResizeObserver` recalculates line heights when the panel is resized ([popup.js:102-106](popup.js#L102-L106)).
+
 ## Permissions
 
 - `storage`: Required for `chrome.storage.local` to persist notes
