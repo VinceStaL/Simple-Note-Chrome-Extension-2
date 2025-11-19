@@ -81,14 +81,33 @@ function createChatArea(id) {
   chatArea.classList.add('chat-area');
   chatArea.style.display = 'none';
 
+  const editorWrapper = document.createElement('div');
+  editorWrapper.classList.add('editor-wrapper');
+
+  const lineNumbers = document.createElement('div');
+  lineNumbers.id = `line-numbers-${id}`;
+  lineNumbers.classList.add('line-numbers');
+
   const textarea = document.createElement('textarea');
   textarea.id = `secureInput-${id}`;
   textarea.classList.add('secure-input');
   textarea.addEventListener('input', function() {
     saveChatContent(id);
+    updateLineNumbers(id);
+  });
+  textarea.addEventListener('scroll', function() {
+    lineNumbers.scrollTop = textarea.scrollTop;
   });
 
-  chatArea.appendChild(textarea);
+  // Update line numbers when textarea is resized
+  const resizeObserver = new ResizeObserver(() => {
+    updateLineNumbers(id);
+  });
+  resizeObserver.observe(textarea);
+
+  editorWrapper.appendChild(lineNumbers);
+  editorWrapper.appendChild(textarea);
+  chatArea.appendChild(editorWrapper);
   document.getElementById('chat-container').appendChild(chatArea);
 
   return chatArea;
@@ -111,6 +130,61 @@ function switchTab(tabId) {
   document.getElementById(tabId).classList.add('active');
 
   currentTabId = tabId;
+
+  // Update line numbers for the active tab
+  updateLineNumbers(tabId);
+}
+
+function updateLineNumbers(tabId) {
+  const textarea = document.getElementById(`secureInput-${tabId}`);
+  const lineNumbers = document.getElementById(`line-numbers-${tabId}`);
+
+  if (!textarea || !lineNumbers) return;
+
+  const text = textarea.value;
+  const lines = text.split('\n');
+
+  // Get textarea styles for measuring
+  const style = window.getComputedStyle(textarea);
+  const lineHeight = parseFloat(style.lineHeight);
+  const paddingLeft = parseFloat(style.paddingLeft);
+  const paddingRight = parseFloat(style.paddingRight);
+  const textareaWidth = textarea.clientWidth - paddingLeft - paddingRight;
+
+  // Create a hidden element to measure text width
+  const measureElement = document.createElement('span');
+  measureElement.style.cssText = `
+    position: absolute;
+    visibility: hidden;
+    white-space: pre;
+    font-family: ${style.fontFamily};
+    font-size: ${style.fontSize};
+    font-weight: ${style.fontWeight};
+    letter-spacing: ${style.letterSpacing};
+  `;
+  document.body.appendChild(measureElement);
+
+  let numbersHtml = '';
+  for (let i = 0; i < lines.length; i++) {
+    // Measure the width of this line
+    measureElement.textContent = lines[i] || ' ';
+    const textWidth = measureElement.offsetWidth;
+
+    // Calculate how many visual lines this text line takes
+    const wrappedLines = Math.max(1, Math.ceil(textWidth / textareaWidth));
+    const height = wrappedLines * lineHeight;
+
+    numbersHtml += `<div style="height: ${height}px; line-height: ${lineHeight}px;">${i + 1}</div>`;
+  }
+
+  document.body.removeChild(measureElement);
+
+  // Ensure at least one line number
+  if (lines.length === 0) {
+    numbersHtml = `<div style="height: ${lineHeight}px; line-height: ${lineHeight}px;">1</div>`;
+  }
+
+  lineNumbers.innerHTML = numbersHtml;
 }
 
 function addNewTab() {
@@ -163,6 +237,7 @@ function deleteSelectedTab() {
     textarea.value = '';
     chatHistory[currentTabId] = encrypt('');
     saveAllData();
+    updateLineNumbers(currentTabId);
     return;
   }
 
@@ -234,6 +309,7 @@ function pasteToCurrentTab() {
     const textarea = document.querySelector(`#chat-area-${currentTabId} textarea`);
     textarea.value += clipboardText;
     saveChatContent(currentTabId);
+    updateLineNumbers(currentTabId);
 
     const pasteButton = document.getElementById('paste-tab');
     pasteButton.style.fontWeight = 'bold';
